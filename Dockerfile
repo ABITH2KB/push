@@ -16,13 +16,13 @@ WORKDIR /app
 COPY Requirements.txt .
 RUN pip install --no-cache-dir flask==3.0.3
 COPY app/ ./app/
- 
+#  sdfghjk
 # Non-root user for security
 RUN useradd -m appuser
 USER appuser
  
 EXPOSE 5000
  
-ENV FLASK_ENV=production
+
  
 CMD ["python", "app/main.py"]
