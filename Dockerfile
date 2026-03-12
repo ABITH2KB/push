@@ -1,8 +1,8 @@
 FROM python:3.12-slim AS builder
 
 WORKDIR /app
-COPY Requirements.txt .
-RUN pip install --no-cache-dir -r Requirements.txt
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app/ ./app/
 COPY tests/ ./tests/
@@ -13,7 +13,7 @@ RUN python -m pytest tests/ -v --tb=short
 FROM python:3.12-slim AS production
 
 WORKDIR /app
-COPY Requirements.txt .
+COPY requirements.txt .
 RUN pip install --no-cache-dir flask==3.0.3
 COPY app/ ./app/
 #  sdfghjk
@@ -23,6 +23,6 @@ USER appuser
  
 EXPOSE 5000
  
-
+ENV FLASK_ENV=production
  
 CMD ["python", "app/main.py"]
